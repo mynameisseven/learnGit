@@ -1,0 +1,280 @@
+1.update TE.CMLN set title = concat(cast(ceil(houseArea/3) as char charset utf8),
+'平米 ',
+ cast(Bedrooms as char charset utf8),
+'卧 '
+);
+
+
+2.SET SQL_SAFE_UPDATES=0;
+
+链学院公众号  lxy@wifiwalker.com  wifi123456
+
+svn用户名和密码  caomenglong caomenglong0611
+
+博客园用户名mynameisseven  密码cao835538_
+CSDN用户名  15764422836    qq密码
+
+123.57.212.171  fyts.bathj.com
+
+新路客:47.94.158.21
+新路客:root   Xinlook2017  m.xinlook.com
+数据库:Xinlookdb
+
+svn://182.92.69.12/web/doctor
+svn://182.92.69.12/web/2017/XLK/
+
+admin@hfbank.com.cn
+111111
+
+admin_pm
+111111
+
+192.168.1.123   Administrator   fengyangts
+
+47.94.106.138     root    Afengyangts100
+
+庆阳线上网易163邮箱账号和密码:    qyhbhpk     8687563
+
+sql sever:uid=bds128633143;
+pwd=xingshang147;
+oss:qpMGATeoau5ekuYa
+lJY6OfsGo8udrlM49PGlrz91l4s79Y
+
+
+123.57.71.181
+jszx#tsxt#181
+
+水泥客户  阿里云    icoat2018   icoat.cc2017
+
+e价格的   账户和密码  SMS_121855175
+
+水泥公众平台   snr@cementren.com       cementren.com
+
+涂料公众平台   tlcg@icoat.cc                     icoat2017
+
+水泥涂料客户数据库服务器   root    sq5998903
+水泥涂料客户服务器密码   snr2017@!
+
+爱仁医后台管理系统   supadmin   airenyi20170922
+
+https://wechat.bathj.com
+
+dir f:\1 >> f:\1.txt
+
+use  mynewdb;
+mysql>\. F:\my\TE.sql。
+
+
+3.update TE.Sheet1 set houseid=(select id from USAHouse.usaHouse_web
+where landNumber like '%AR16180071%')
+where pathname like '%AR16180071%';
+
+
+4.update TE.sheet1 set OriginalEntryTimestamp=str_to_date('8/16/2016', '%m/%d/%Y');
+
+
+5.update USAHouse.usaHousePic_web set path_name = REPLACE (path_name, ' ', '');
+
+6.select count(id) from USAHouse.usaHouse_web;
+
+7.update USAHouse.Sheet1 set pathname = concat(cast( 'http://img.xingshang.com/haiwaiPIC/' as char charset utf8),
+
+'',
+
+cast(pathname as char charset utf8),
+
+''
+
+);
+
+
+8.
+insert into [bds128633143_db].[dbo].[view_overseaspic_web] (id,path_name, houseid)
+select id as id,path_name as path_name, houseid as houseid  from [bds128633143_db].[dbo].[Sheet1$];
+
+
+insert into USAHouse.usaHousePic_web (path_name, houseid)
+
+select pathname as path_name, houseid as houseid  from USAHouse.Sheet1;
+
+
+9.insert into TE.abc (title, bedroom)
+select concat(cast(ceil(居住面积/3) as char charset utf8),
+
+'平米 ',
+
+cast(卧室 as char charset utf8),
+
+'卧 ',
+
+cast(浴室 as char charset utf8),
+
+'浴 ',
+
+cast(类型 as char charset utf8),
+
+' '
+
+) as title, 卧室 as bedroom from USAHouse.Sheet1;
+
+
+10.
+
+insert into USAHouse.usaHouse_web(title,propertyType,completedYear,houseArea,landArea,room,toilet,floor,landNumber,price,uniprice,area,address)
+select title as title,propertyType as propertyType,YearBuilt as completedYear,houseArea as houseArea,LotSquare as landArea,Bedrooms as room,BathsTotal as
+ toilet,floo as floor,mls as landNumber,CurrentPrice as price,PricePerSquare as uniprice,City as area,address as address from TE.CMLN;
+
+
+
+
+11.update USAHouse.usaHouse_web w set address=(select address from TE.CMLN c where c.mls=w.landNumber);
+
+
+
+12.address=街道号+街道名称+城市+州+邮编
+街道号 街道名称，城市，州的缩写 邮编
+
+
+13.Commercial/Residential/Condominium商住混合
+Single Family Residence 独立屋
+Townhouse 连排别墅
+
+
+14.update TE.CMLN set address = concat(cast(StreetNumber as char charset utf8),
+
+' ',
+
+cast(StreetName as char charset utf8),
+
+', ',
+cast(City as char charset utf8),
+
+', CA ',
+
+cast(ZipCode as char charset utf8),
+
+''
+
+);
+(注意空格的使用)
+
+
+15.insert into USAHouse.usaHouse_web
+select * from TE.CMLN
+  where id='101';
+
+16.update USAHouse.usaHouse_web t set t.operate='外营',t.rent='0',t.rentUnit='',lastTime='',lastPrice='',total='0',hospital='',orientation='',furniture='',dealType='Standard',
+dealState='Active',decoration='',pool='无',coolAir='中央空调',structure='',population='',landrights='永久产权',housetax='',houseType='二手房';
+
+
+17.SELECT a.*,s.area, s.县 FROM TE.abc a left join USAHouse.Sheet1 s on s.area = a.street;
+
+
+18.select id from USAHouse.usaHouse_web where id not in  (select distinct houseid from USAHouse.usaHousePic_web);
+
+
+19.select substring(pathname, 36, 10) from TE.img;
+(表示截取为从列名为pathname的第三十六位开始后的10位字符串)
+
+20.select substring(pathname, -6, 8) from TE.img;
+(表示截取为从列名为pathname的倒数第六位开始往后数8位的字符串)
+
+
+21. select right(pathname, 3);
+(表示截取为从列名为pathname的右面开始的三个字符串)
+
+22.select left(pathname, 3);
+(表示截取为从列名为pathname的左面开始的三个字符串)
+
+
+23.select * from people p where p.id = ? and p.name = ?;
+
+
+24.update TE.haiwaiPIC set path_name= substring_index(pathname, '/', -1);
+
+
+
+25.update TE.haiwaiPIC set path_name= substring_index(path_name, '_', 1);
+
+
+
+26.update bds128633143_db.dbo.view_overseas_web set bds128633143_db.dbo.view_overseas_web.comment_c=bds128633143_db.dbo.Sheet1$.译文 from bds128633143_db.dbo.view_overseas_web,bds128633143_db.dbo.Sheet1$ where bds128633143_db.dbo.view_overseas_web.id=bds128633143_db.dbo.Sheet1$.id;
+
+
+27.SELECT COUNT(column_name) FROM table_name;
+
+
+28.select distinct * into #Tmp from [bds128633143_db].[dbo].[Sheet1$]
+drop table [bds128633143_db].[dbo].[Sheet1$]
+select * into tableName from #Tmp
+drop table #Tmp
+
+
+
+29.alter table TE.Sheet1 change column Pool pool varchar(255);
+
+
+30.update TE.Sheet1 set pool='有' where pool not in ('有','无');
+
+
+31.SELECT Count(xingshang.customerWithLook.userId) as newcolumnname
+
+FROM xingshang.customerWithLook
+INNER
+JOIN xingshang.house
+
+ON xingshang.customerWithLook.houseId=xingshang.house.id;
+
+
+32.        select count(price) from fruit;                        ----执行之后结果为：2  (表示有2条记录)
+             select  sum(price) from fruit;                          ---执行之后结果为：7:00（表示各记录price字段之和为7.00）
+
+33.  select id,pathname,houseid from [bds128633143_db].[dbo].[Sheet1$] group by id,pathname,houseid having count(*)>1;
+
+
+
+34.delete
+from people
+where peopleId in (select peopleId from
+people group by peopleId having
+count(peopleId) > 1)
+and rowid not in (select min(rowid) from
+people group by peopleId having count(peopleId
+)>1)
+
+
+35.     insert into [bds128633143_db].[dbo].[view_overseaspic_web](id,path_name,houseid)
+  select id as id,path_name as path_name,houseid as houseid from [bds128633143_db].[dbo].[Sheet1$];
+
+
+
+36.order by 列名 desc/asc;
+
+
+
+37查找重复键：.SELECT TOP 3000 [id]
+      ,[path_name]
+      ,[houseid]
+  FROM [bds128633143_db].[dbo].[view_overseaspic_web]
+  where id in (
+  select id from [bds128633143_db].[dbo].[Sheet1$]
+  );
+
+
+
+
+
+38.  update [bds128633143_db].[dbo].[view_overseaspic_web] set
+   houseid=(select id from [bds128633143_db].[dbo].[view_overseas_web]
+   where [bds128633143_db].[dbo].[view_overseas_web].landNumber=[bds128633143_db].[dbo].[view_overseaspic_web].pathname)
+   where id>60523 and houseid is null ;
+
+
+
+39.    update  [bds128633143_db].[dbo].[view_overseaspic_web] set pathname=substring(path_name,36,10) where id>60523;
+
+
+40.  select count(path_name) from [bds128633143_db].[dbo].[view_overseaspic_web] where id>60523;
+
+       SELECT count(DISTINCT path_name) FROM [bds128633143_db].[dbo].[view_overseaspic_web] where id>60523;
+
